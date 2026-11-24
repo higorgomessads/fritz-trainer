@@ -1,6 +1,6 @@
 // ==========================================
 // FRITZ TRAINER - AUTENTICAÇÃO
-// Supabase Auth
+// Supabase Auth (Admin + Aluno)
 // ==========================================
 
 import { createClient } from
@@ -17,7 +17,9 @@ const authSubtitle = document.getElementById("auth-subtitle");
 const tabLogin = document.getElementById("tab-login");
 const tabSignup = document.getElementById("tab-signup");
 const signupNameGroup = document.getElementById("signup-name-group");
+const signupPhoneGroup = document.getElementById("signup-phone-group");
 const fullNameInput = document.getElementById("full-name");
+const phoneInput = document.getElementById("phone");
 
 const loginForm = document.getElementById("login-form");
 const emailInput = document.getElementById("email");
@@ -42,7 +44,7 @@ function setLoading(loading) {
       authMode === "signup" ? "CRIANDO CONTA..." : "AUTENTICANDO...";
   } else {
     loginButton.textContent =
-      authMode === "signup" ? "CRIAR CONTA" : "ENTRAR NO PAINEL";
+      authMode === "signup" ? "CRIAR CONTA" : "ENTRAR";
   }
 }
 
@@ -59,6 +61,10 @@ function setAuthMode(nextMode) {
     signupNameGroup.hidden = !isSignup;
   }
 
+  if (signupPhoneGroup) {
+    signupPhoneGroup.hidden = !isSignup;
+  }
+
   if (fullNameInput) {
     fullNameInput.required = isSignup;
   }
@@ -71,13 +77,13 @@ function setAuthMode(nextMode) {
   }
 
   if (authTitle) {
-    authTitle.textContent = isSignup ? "Criar conta" : "Área administrativa";
+    authTitle.textContent = isSignup ? "Criar conta" : "Acessar conta";
   }
 
   if (authSubtitle) {
     authSubtitle.textContent = isSignup
-      ? "Cadastre sua conta para solicitar ou acessar o sistema."
-      : "Acesse sua conta para gerenciar a academia.";
+      ? "Cadastre-se como aluno para acompanhar planos e treinos."
+      : "Entre com seu e-mail e senha de aluno ou administrador.";
   }
 
   setLoading(false);
@@ -95,18 +101,18 @@ async function authorizeAndRedirect(user) {
     .maybeSingle();
 
   if (error) {
-    console.error("Erro ao validar permissão administrativa:", error);
-    showMessage("Erro ao verificar permissão administrativa.");
+    console.error("Erro ao validar permissão de acesso:", error);
+    showMessage("Erro ao verificar permissão de acesso.");
     return false;
   }
 
-  if (!adminRecord) {
-    await supabase.auth.signOut();
-    showMessage("Esta conta não possui acesso administrativo.");
-    return false;
+  if (adminRecord) {
+    window.location.replace("admin.html");
+    return true;
   }
 
-  window.location.replace("admin.html");
+  // Conta de aluno: mantém sessão ativa e redireciona para a página de planos
+  window.location.replace("planos.html");
   return true;
 }
 
@@ -132,6 +138,7 @@ if (loginForm) {
     event.preventDefault();
 
     const nome = fullNameInput ? fullNameInput.value.trim() : "";
+    const telefone = phoneInput ? phoneInput.value.trim() : "";
     const email = emailInput ? emailInput.value.trim() : "";
     const password = passwordInput ? passwordInput.value : "";
 
@@ -161,21 +168,14 @@ if (loginForm) {
           email,
           password,
           options: {
-            data: { nome }
+            data: { nome, telefone }
           }
         });
 
         if (error) throw error;
 
         if (data.session?.user) {
-          const allowed = await authorizeAndRedirect(data.session.user);
-          if (!allowed) {
-            showMessage(
-              "Conta criada com sucesso! Para acessar o painel administrativo, ative seu usuário na tabela admins.",
-              "success"
-            );
-            setLoading(false);
-          }
+          await authorizeAndRedirect(data.session.user);
         } else {
           loginForm.reset();
           showMessage(
