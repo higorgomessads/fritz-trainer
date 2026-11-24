@@ -323,3 +323,24 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: 0;
+    padding: 10px;
+    z-index: 3;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background: white;
+  }
+
+  .menu-toggle {
+  display: none;
+}
