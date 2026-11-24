@@ -17,6 +17,7 @@ const userAvatarEl = document.getElementById("user-avatar");
 const logoutButton = document.getElementById("logout-button");
 const mobileMenuBtn = document.getElementById("mobile-menu");
 const sidebar = document.getElementById("sidebar");
+const sidebarBackdrop = document.getElementById("sidebar-backdrop");
 const adminToast = document.getElementById("admin-message");
 
 // Indicadores do Dashboard
@@ -76,6 +77,40 @@ function formatCurrency(value) {
   return num.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
+// Controle do Menu Mobile (3 risquinhos)
+function setSidebarOpen(open) {
+  if (!sidebar) return;
+  sidebar.classList.toggle("open", open);
+  sidebarBackdrop?.classList.toggle("active", open);
+  if (mobileMenuBtn) {
+    mobileMenuBtn.setAttribute("aria-expanded", String(open));
+    mobileMenuBtn.textContent = open ? "✕" : "☰";
+  }
+}
+
+if (mobileMenuBtn && sidebar) {
+  mobileMenuBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const isOpen = sidebar.classList.contains("open");
+    setSidebarOpen(!isOpen);
+  });
+}
+
+sidebarBackdrop?.addEventListener("click", () => setSidebarOpen(false));
+
+document.addEventListener("click", (event) => {
+  if (!sidebar?.classList.contains("open")) return;
+  if (!sidebar.contains(event.target) && !mobileMenuBtn?.contains(event.target)) {
+    setSidebarOpen(false);
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && sidebar?.classList.contains("open")) {
+    setSidebarOpen(false);
+  }
+});
+
 // Proteção da sessão e validação de administrador
 async function requireAdminSession() {
   const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
@@ -108,7 +143,7 @@ async function requireAdminSession() {
   return { user, adminProfile };
 }
 
-// Navegação entre secções e menu mobile
+// Navegação entre seções e fechamento automático no mobile
 function switchSection(sectionName) {
   navButtons.forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.section === sectionName);
@@ -123,9 +158,7 @@ function switchSection(sectionName) {
     pageTitle.textContent = activeBtn.textContent.trim().replace(/^[^\wÀ-ú]+\s*/, "");
   }
 
-  if (sidebar && sidebar.classList.contains("open")) {
-    sidebar.classList.remove("open");
-  }
+  setSidebarOpen(false);
 }
 
 navButtons.forEach((btn) => {
@@ -133,13 +166,6 @@ navButtons.forEach((btn) => {
     switchSection(btn.dataset.section);
   });
 });
-
-if (mobileMenuBtn && sidebar) {
-  mobileMenuBtn.addEventListener("click", () => {
-    const isOpen = sidebar.classList.toggle("open");
-    mobileMenuBtn.setAttribute("aria-expanded", String(isOpen));
-  });
-}
 
 if (logoutButton) {
   logoutButton.addEventListener("click", async () => {
@@ -219,8 +245,8 @@ function renderAlunos() {
         <td>${escapeHtml(aluno.email || "—")}</td>
         <td>${escapeHtml(aluno.status || "ativo")}</td>
         <td>
-          <button type="button" data-edit-student="${escapeHtml(aluno.id)}">Editar</button>
-          <button type="button" data-delete-student="${escapeHtml(aluno.id)}">Excluir</button>
+          <button type="button" class="btn btn-small" data-edit-student="${escapeHtml(aluno.id)}">Editar</button>
+          <button type="button" class="btn btn-small btn-danger" data-delete-student="${escapeHtml(aluno.id)}">Excluir</button>
         </td>
       </tr>
     `
@@ -376,10 +402,10 @@ async function loadPlanos() {
   planosListEl.innerHTML = data
     .map(
       (plano) => `
-      <article class="stat-card">
-        <strong>${escapeHtml(plano.nome)}</strong>
-        <p>${escapeHtml(plano.descricao || "")}</p>
-        <span>${formatCurrency(plano.preco)} • ${escapeHtml(plano.duracao_dias)} dias</span>
+      <article class="plan-card">
+        <h3>${escapeHtml(plano.nome)}</h3>
+        <div class="price">${formatCurrency(plano.preco)}</div>
+        <p>${escapeHtml(plano.descricao || "")} • ${escapeHtml(plano.duracao_dias)} dias</p>
       </article>
     `
     )
