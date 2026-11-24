@@ -1,0 +1,476 @@
+
+/* =========================================
+   FRITZ TRAINER - PLANOS
+========================================= */
+
+/* HERO */
+
+.plans-hero {
+    padding: 100px 20px 80px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8, 10, 9, 0.97),
+            rgba(17, 21, 18, 0.94)
+        );
+    text-align: center;
+    border-bottom: 1px solid rgba(39, 184, 93, 0.15);
+}
+
+.plans-hero .container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.section-tag {
+    display: inline-block;
+    color: #27b85d;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+.plans-hero h1 {
+    color: #f5f6f3;
+    font-size: clamp(36px, 6vw, 68px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.plans-hero h1 span,
+.section-heading h2 span {
+    color: #27b85d;
+}
+
+.plans-hero p {
+    color: #a6ada7;
+    font-size: 17px;
+    line-height: 1.7;
+    max-width: 650px;
+    margin: auto;
+}
+
+
+/* =========================================
+   SEÇÃO DOS PLANOS
+========================================= */
+
+.plans-section {
+    background: #080a09;
+    padding: 90px 20px;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.section-heading h2 {
+    color: #f5f6f3;
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.section-heading p {
+    color: #a6ada7;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* GRID */
+
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    max-width: 1150px;
+    margin: auto;
+    align-items: stretch;
+}
+
+
+/* =========================================
+   CARTÕES
+========================================= */
+
+.plan-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: #111512;
+    border: 1px solid #252c27;
+    border-radius: 16px;
+    padding: 35px 28px;
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.plan-card:hover {
+    transform: translateY(-8px);
+    border-color: #27b85d;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.plan-card.featured {
+    border: 1px solid #27b85d;
+    background:
+        linear-gradient(
+            160deg,
+            #142219,
+            #111512 65%
+        );
+}
+
+.plan-badge {
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    background: #27b85d;
+    color: #080a09;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 8px 12px;
+    border-radius: 30px;
+}
+
+
+/* CABEÇALHO DO CARTÃO */
+
+.plan-header {
+    margin-bottom: 28px;
+}
+
+.plan-header h3 {
+    color: #f5f6f3;
+    font-size: 27px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.plan-header p {
+    color: #a6ada7;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* PREÇO */
+
+.plan-price {
+    padding: 22px 0;
+    margin-bottom: 20px;
+    border-top: 1px solid #252c27;
+    border-bottom: 1px solid #252c27;
+}
+
+.plan-price span {
+    color: #27b85d;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+/* BENEFÍCIOS */
+
+.plan-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px;
+    flex: 1;
+}
+
+.plan-benefits li {
+    color: #d2d8d3;
+    font-size: 14px;
+    padding: 11px 0;
+    line-height: 1.5;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+
+/* BOTÃO */
+
+.btn-plan {
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    background: #27b85d;
+    color: #080a09;
+    text-decoration: none;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-plan:hover {
+    background: #36d873;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   CHAMADA FINAL
+========================================= */
+
+.plans-cta {
+    padding: 85px 20px;
+    background: #111512;
+    text-align: center;
+    border-top: 1px solid #252c27;
+}
+
+.plans-cta .container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.plans-cta h2 {
+    color: #f5f6f3;
+    font-size: clamp(27px, 5vw, 42px);
+    font-weight: 900;
+    margin-bottom: 18px;
+}
+
+.plans-cta p {
+    color: #a6ada7;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 16px 32px;
+    background: #27b85d;
+    color: #080a09;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    transition: 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #36d873;
+    transform: translateY(-3px);
+}
+
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+.footer {
+    background: #080a09;
+    padding: 35px 20px;
+    text-align: center;
+    border-top: 1px solid #252c27;
+}
+
+.footer p {
+    color: #858e87;
+    font-size: 12px;
+    margin-top: 18px;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .plans-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .plans-hero {
+        padding: 75px 20px 65px;
+    }
+
+    .plans-hero p {
+        font-size: 15px;
+    }
+
+    .plans-section {
+        padding: 65px 18px;
+    }
+
+    .section-heading {
+        margin-bottom: 35px;
+    }
+
+    .plans-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .plan-card {
+        padding: 30px 23px;
+    }
+
+    .plan-card:hover {
+        transform: none;
+    }
+
+    .plans-cta {
+        padding: 65px 20px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        max-width: 320px;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .plan-card,
+    .btn-plan,
+    .btn-primary {
+        transition: none;
+    }
+
+}
+
+/* ==========================================
+   FRITZ TRAINER - HEADER / NAVEGAÇÃO (PLANOS)
+========================================== */
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 76px;
+}
+
+.logo {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: #080a09;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: #27b85d;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav a {
+    color: #1f2923;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.nav a:hover,
+.nav a.active {
+    color: #27b85d;
+}
+
+.btn-login {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background-color: #27b85d;
+    color: #080a09;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn-login:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+}
+
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid rgba(8, 10, 9, 0.2);
+    border-radius: 8px;
+    color: #080a09;
+    font-size: 1.3rem;
+    line-height: 1;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+/* Responsividade mobile */
+@media (max-width: 820px) {
+    .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 18px 20px;
+        background-color: #0d110f;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 99;
+    }
+
+    .nav a {
+        color: #d4dcd7;
+    }
+
+    .nav.open {
+        display: flex;
+    }
+
+    .btn-login {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+}

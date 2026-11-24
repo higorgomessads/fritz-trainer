@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080a09">
+  <meta name="description" content="Acesso administrativo FRITZ TRAINER.">
+  <title>Login | FRITZ TRAINER</title>
+
+  <link rel="icon" href="assets/logo-fritz-trainer.png">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+  <main class="login-page">
+    <section class="login-card">
+
+      <img
+        src="assets/logo-fritz-trainer.png"
+        alt="FRITZ TRAINER"
+        class="login-logo"
+      >
+
+      <h1 id="auth-title">Área administrativa</h1>
+
+      <p class="login-subtitle" id="auth-subtitle">
+        Acesse sua conta para gerenciar a academia.
+      </p>
+
+      <div class="auth-mode-switch" role="tablist" aria-label="Modo de acesso">
+        <button type="button" id="tab-login" class="auth-tab active" role="tab" aria-selected="true">
+          Entrar
+        </button>
+        <button type="button" id="tab-signup" class="auth-tab" role="tab" aria-selected="false">
+          Cadastrar
+        </button>
+      </div>
+
+      <form id="login-form" class="login-form">
+
+        <div id="signup-name-group" hidden>
+          <label for="full-name">Nome completo</label>
+          <input
+            type="text"
+            id="full-name"
+            name="fullName"
+            placeholder="Seu nome"
+            autocomplete="name"
+          >
+        </div>
+
+        <div>
+          <label for="email">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Seu e-mail"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <div>
+          <label for="password">Senha</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Sua senha (mín. 6 caracteres)"
+            autocomplete="current-password"
+            required
+          >
+        </div>
+
+        <button
+          type="submit"
+          class="login-button"
+          id="login-button"
+        >
+          ENTRAR NO PAINEL
+        </button>
+
+        <p
+          id="login-message"
+          class="login-message"
+          role="alert"
+          aria-live="polite"
+        ></p>
+
+      </form>
+
+      <a href="index.html" class="login-back">
+        ← Voltar ao site
+      </a>
+
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>
