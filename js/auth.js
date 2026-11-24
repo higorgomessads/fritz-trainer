@@ -204,9 +204,20 @@ if (loginForm) {
       console.error("Erro na autenticação:", error);
 
       if (authMode === "signup") {
-        showMessage(
-          error?.message || "Não foi possível criar a conta. Tente novamente."
-        );
+        const msg = String(error?.message || "").toLowerCase();
+        if (msg.includes("rate limit")) {
+          showMessage(
+            "Muitas tentativas de cadastro seguidas. Aguarde alguns minutos e tente novamente."
+          );
+        } else if (msg.includes("already registered")) {
+          showMessage(
+            "Este e-mail já está cadastrado. Tente entrar na aba Entrar."
+          );
+        } else {
+          showMessage(
+            error?.message || "Não foi possível criar a conta. Tente novamente."
+          );
+        }
       } else {
         showMessage("Não foi possível entrar. Confira seu e-mail e sua senha.");
       }
